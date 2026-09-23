@@ -14,7 +14,256 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+          status: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone?: string
+          status?: string
+          subject?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          status?: string
+          subject?: string
+        }
+        Relationships: []
+      }
+      customization_requests: {
+        Row: {
+          created_at: string
+          id: string
+          images: string[]
+          note: string
+          product_id: string | null
+          product_name: string
+          product_slug: string
+          quantity: number
+          reference: string
+          selections: Json
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          images?: string[]
+          note?: string
+          product_id?: string | null
+          product_name?: string
+          product_slug?: string
+          quantity?: number
+          reference: string
+          selections?: Json
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          images?: string[]
+          note?: string
+          product_id?: string | null
+          product_name?: string
+          product_slug?: string
+          quantity?: number
+          reference?: string
+          selections?: Json
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customization_requests_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          badge: string | null
+          best_seller: boolean
+          blurb: string
+          category: string
+          created_at: string
+          custom_fields: Json
+          description: string
+          featured: boolean
+          features: string[]
+          frame: boolean
+          frame_borders: Json
+          frame_layouts: Json
+          gift_wrap_price: number
+          id: string
+          image: string
+          images: string[]
+          low_stock_threshold: number
+          mrp: number | null
+          name: string
+          new_arrival: boolean
+          occasions: string[]
+          options: Json
+          personalization: boolean
+          photo_upload: boolean
+          price: number
+          published: boolean
+          rating: number
+          reviews: number
+          sku: string | null
+          slug: string
+          sort_order: number
+          specs: Json
+          stock_qty: number | null
+          stock_status: string
+          trending: boolean
+          updated_at: string
+        }
+        Insert: {
+          badge?: string | null
+          best_seller?: boolean
+          blurb?: string
+          category?: string
+          created_at?: string
+          custom_fields?: Json
+          description?: string
+          featured?: boolean
+          features?: string[]
+          frame?: boolean
+          frame_borders?: Json
+          frame_layouts?: Json
+          gift_wrap_price?: number
+          id?: string
+          image?: string
+          images?: string[]
+          low_stock_threshold?: number
+          mrp?: number | null
+          name: string
+          new_arrival?: boolean
+          occasions?: string[]
+          options?: Json
+          personalization?: boolean
+          photo_upload?: boolean
+          price?: number
+          published?: boolean
+          rating?: number
+          reviews?: number
+          sku?: string | null
+          slug: string
+          sort_order?: number
+          specs?: Json
+          stock_qty?: number | null
+          stock_status?: string
+          trending?: boolean
+          updated_at?: string
+        }
+        Update: {
+          badge?: string | null
+          best_seller?: boolean
+          blurb?: string
+          category?: string
+          created_at?: string
+          custom_fields?: Json
+          description?: string
+          featured?: boolean
+          features?: string[]
+          frame?: boolean
+          frame_borders?: Json
+          frame_layouts?: Json
+          gift_wrap_price?: number
+          id?: string
+          image?: string
+          images?: string[]
+          low_stock_threshold?: number
+          mrp?: number | null
+          name?: string
+          new_arrival?: boolean
+          occasions?: string[]
+          options?: Json
+          personalization?: boolean
+          photo_upload?: boolean
+          price?: number
+          published?: boolean
+          rating?: number
+          reviews?: number
+          sku?: string | null
+          slug?: string
+          sort_order?: number
+          specs?: Json
+          stock_qty?: number | null
+          stock_status?: string
+          trending?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value?: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      site_events: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string | null
+          product_name: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          product_name?: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          product_name?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_events_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
