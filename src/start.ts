@@ -23,6 +23,16 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
 // from cross-site requests.
 const csrfMiddleware = createCsrfMiddleware({
   filter: (ctx) => ctx.handlerType === "serverFn",
+  // Same-origin plus the Lovable preview/published hosts, which the editor
+  // serves inside an iframe.
+  origin: (origin, ctx) => {
+    try {
+      if (origin === new URL(ctx.request.url).origin) return true;
+      return new URL(origin).hostname.endsWith(".lovable.app");
+    } catch {
+      return false;
+    }
+  },
 });
 
 export const startInstance = createStart(() => ({
