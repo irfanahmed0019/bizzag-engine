@@ -302,7 +302,7 @@ export const adminSaveContact = createServerFn({ method: "POST" })
     const clean = Object.fromEntries(
       Object.entries(data).map(([k, v]) => [k, String(v ?? "").slice(0, 400)]),
     );
-    clean.email = "irfanahammadj@gmail.com";
+    clean["email"] = "irfanahammadj@gmail.com";
     const { error } = await db
       .from("site_content")
       .upsert({ key: "contact", value: clean }, { onConflict: "key" });
