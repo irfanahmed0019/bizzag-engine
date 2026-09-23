@@ -18,8 +18,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CustomFrameRouteImport } from './routes/custom-frame'
 import { Route as CustomizeRouteImport } from './routes/customize'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as ShopRouteImport } from './routes/shop'
 import { Route as NewDropsRouteImport } from './routes/new-drops'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as AdminProductUidRouteImport } from './routes/admin.product.$uid'
@@ -70,14 +70,14 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShopRoute = ShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NewDropsRoute = NewDropsRouteImport.update({
   id: '/new-drops',
   path: '/new-drops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -111,8 +111,8 @@ export interface FileRoutesByFullPath {
   '/custom-frame': typeof CustomFrameRoute
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
   '/new-drops': typeof NewDropsRoute
+  '/shop': typeof ShopRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -127,8 +127,8 @@ export interface FileRoutesByTo {
   '/custom-frame': typeof CustomFrameRoute
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
   '/new-drops': typeof NewDropsRoute
+  '/shop': typeof ShopRoute
   '/product/$id': typeof ProductIdRoute
   '/admin': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -145,8 +145,8 @@ export interface FileRoutesById {
   '/custom-frame': typeof CustomFrameRoute
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
   '/new-drops': typeof NewDropsRoute
+  '/shop': typeof ShopRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -164,8 +164,8 @@ export interface FileRouteTypes {
     | '/custom-frame'
     | '/customize'
     | '/login'
-    | '/shop'
     | '/new-drops'
+    | '/shop'
     | '/product/$id'
     | '/admin/'
     | '/admin/product/$uid'
@@ -180,8 +180,8 @@ export interface FileRouteTypes {
     | '/custom-frame'
     | '/customize'
     | '/login'
-    | '/shop'
     | '/new-drops'
+    | '/shop'
     | '/product/$id'
     | '/admin'
     | '/admin/product/$uid'
@@ -197,8 +197,8 @@ export interface FileRouteTypes {
     | '/custom-frame'
     | '/customize'
     | '/login'
-    | '/shop'
     | '/new-drops'
+    | '/shop'
     | '/product/$id'
     | '/admin/'
     | '/admin/product/$uid'
@@ -215,6 +215,7 @@ export interface RootRouteChildren {
   CustomFrameRoute: typeof CustomFrameRoute
   CustomizeRoute: typeof CustomizeRoute
   LoginRoute: typeof LoginRoute
+  NewDropsRoute: typeof NewDropsRoute
   ShopRoute: typeof ShopRoute
   ProductIdRoute: typeof ProductIdRoute
   ApiPublicMediaSplatRoute: typeof ApiPublicMediaSplatRoute
@@ -285,18 +286,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/shop': {
-      id: '/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof ShopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/new-drops': {
       id: '/new-drops'
       path: '/new-drops'
       fullPath: '/new-drops'
       preLoaderRoute: typeof NewDropsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -352,8 +353,8 @@ const rootRouteChildren: RootRouteChildren = {
   CustomFrameRoute: CustomFrameRoute,
   CustomizeRoute: CustomizeRoute,
   LoginRoute: LoginRoute,
-  ShopRoute: ShopRoute,
   NewDropsRoute: NewDropsRoute,
+  ShopRoute: ShopRoute,
   ProductIdRoute: ProductIdRoute,
   ApiPublicMediaSplatRoute: ApiPublicMediaSplatRoute,
 }
