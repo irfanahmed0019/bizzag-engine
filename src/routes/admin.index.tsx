@@ -26,6 +26,7 @@ import {
   type HomeContent,
   type CategoryItem,
   type SiteSettings,
+  type HomeHero,
 } from "@/lib/catalog.functions";
 import { categories as fallbackCategories, categoryName, formatINR, stockLabel } from "@/lib/products";
 
@@ -316,11 +317,13 @@ function HomeEditor({ initial }: { initial: HomeContent | undefined }) {
       <div>
         <h2 className="font-display text-2xl font-semibold">Home page</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Photos and order of the “Gifts For Every Occasion” cards and the Bestsellers row.
+          Every text, banner and photo customers see on the home page.
         </p>
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
+
+      <HeroFields hero={form.hero} onChange={(hero) => set({ hero })} onError={setError} />
 
       <section className="rounded-lg border border-border p-6">
         <div className="grid gap-5 sm:grid-cols-2">
@@ -992,5 +995,68 @@ function CategoriesEditor() {
         {msg && <span className="text-sm text-muted-foreground">{msg}</span>}
       </div>
     </div>
+  );
+}
+
+const heroTextFields: [keyof HomeHero, string, boolean?][] = [
+  ["eyebrow", "Top banner small label"], ["title", "Top banner headline"], ["subtitle", "Top banner text", true],
+  ["primaryCta", "Main button text"], ["secondaryCta", "Second button text"],
+  ["banner1Eyebrow", "Banner 1 label"], ["banner1Title", "Banner 1 headline"], ["banner1Text", "Banner 1 text", true], ["banner1Cta", "Banner 1 button"],
+  ["banner2Eyebrow", "Banner 2 label"], ["banner2Title", "Banner 2 headline"], ["banner2Text", "Banner 2 text", true], ["banner2Cta", "Banner 2 button"],
+  ["picksEyebrow", "Picks section label"], ["picksHeading", "Picks section heading"],
+];
+
+function HeroFields({ hero, onChange, onError }: { hero: HomeHero; onChange: (h: HomeHero) => void; onError: (e: string | null) => void }) {
+  const [busy, setBusy] = useState<string | null>(null);
+  async function upload(key: "image" | "banner1Image" | "banner2Image", file: File) {
+    onError(null);
+    setBusy(key);
+    try {
+      const { url } = await adminUploadImage({
+        data: { filename: file.name, contentType: file.type, base64: await fileToBase64(file) },
+      });
+      onChange({ ...hero, [key]: url });
+    } catch (e) {
+      onError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setBusy(null);
+    }
+  }
+  const imgs: ["image" | "banner1Image" | "banner2Image", string][] = [
+    ["image", "Top banner background"], ["banner1Image", "Banner 1 photo"], ["banner2Image", "Banner 2 photo"],
+  ];
+  return (
+    <section className="rounded-lg border border-border p-6">
+      <h3 className="font-semibold">Banners & text</h3>
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        {imgs.map(([k, label]) => (
+          <div key={k} className="space-y-2 text-sm">
+            <span className="font-medium">{label}</span>
+            <div className="aspect-video overflow-hidden rounded-md border border-border bg-secondary">
+              {hero[k] ? <img src={hero[k]} alt="" className="size-full object-cover" /> : <p className="grid size-full place-items-center text-xs text-muted-foreground">Default look</p>}
+            </div>
+            <div className="flex gap-2">
+              <label className="cursor-pointer rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-secondary">
+                {busy === k ? "Uploading…" : "Upload photo"}
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) void upload(k, f); e.target.value = ""; }} />
+              </label>
+              {hero[k] && <button type="button" className="text-xs text-muted-foreground underline" onClick={() => onChange({ ...hero, [k]: "" })}>Remove</button>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        {heroTextFields.filter(([k]) => k in hero).map(([k, label, long]) => (
+          <label key={k} className={`block text-sm ${long ? "sm:col-span-2" : ""}`}>
+            <span className="font-medium">{label}</span>
+            {long ? (
+              <textarea rows={2} value={hero[k]} onChange={(e) => onChange({ ...hero, [k]: e.target.value })} className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none" />
+            ) : (
+              <input value={hero[k]} onChange={(e) => onChange({ ...hero, [k]: e.target.value })} className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none" />
+            )}
+          </label>
+        ))}
+      </div>
+    </section>
   );
 }

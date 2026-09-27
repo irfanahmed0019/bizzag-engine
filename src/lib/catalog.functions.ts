@@ -683,6 +683,26 @@ export type HomeContent = {
   bestsellersEyebrow: string;
   /** Product slugs, in the order the admin arranged them. */
   bestsellers: string[];
+  /** Editable homepage text + banner images. */
+  hero: HomeHero;
+};
+
+export type HomeHero = {
+  eyebrow: string; title: string; subtitle: string; image: string;
+  primaryCta: string; secondaryCta: string;
+  banner1Eyebrow: string; banner1Title: string; banner1Text: string; banner1Cta: string; banner1Image: string;
+  banner2Eyebrow: string; banner2Title: string; banner2Text: string; banner2Cta: string; banner2Image: string;
+  picksEyebrow: string; picksHeading: string;
+};
+
+export const defaultHomeHero: HomeHero = {
+  eyebrow: "TRENDING NOW", title: "BE YOUR STYLE.", subtitle: "Trending pieces. Everyday fits. Built for your rotation.", image: "",
+  primaryCta: "SHOP NEW DROPS", secondaryCta: "EXPLORE THE STYLE",
+  banner1Eyebrow: "NEW DROP", banner1Title: "STREETWEAR ESSENTIALS", banner1Text: "Fits for every day. Made for your story.", banner1Cta: "SHOP COLLECTION",
+  banner1Image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=90",
+  banner2Eyebrow: "BIZZAG ORIGINALS", banner2Title: "WE'RE BUILDING OUR OWN.", banner2Text: "Today's trends help us understand what tomorrow's BIZZAG pieces should look like.", banner2Cta: "FOLLOW THE BUILD",
+  banner2Image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=90",
+  picksEyebrow: "BIZZAG PICKS", picksHeading: "Built for the rotation.",
 };
 
 export async function defaultHomeContent(): Promise<HomeContent> {
@@ -699,6 +719,7 @@ export async function defaultHomeContent(): Promise<HomeContent> {
     bestsellersEyebrow: "TRENDING NOW",
     bestsellersHeading: "THE PIECES PEOPLE WANT",
     bestsellers: [],
+    hero: { ...defaultHomeHero },
   };
 }
 
@@ -718,6 +739,7 @@ export const getHomeContent = createServerFn({ method: "GET" }).handler(
         ...v,
         occasions: Array.isArray(v.occasions) && v.occasions.length > 0 ? v.occasions : base.occasions,
         bestsellers: Array.isArray(v.bestsellers) ? v.bestsellers : [],
+        hero: { ...defaultHomeHero, ...(v.hero ?? {}) },
       };
     } catch (error) {
       console.error("[catalog] getHomeContent failed", error);
@@ -748,6 +770,12 @@ export const adminSaveHome = createServerFn({ method: "POST" })
       bestsellers: (Array.isArray(data.bestsellers) ? data.bestsellers : [])
         .slice(0, 12)
         .map((s) => String(s).slice(0, 120)),
+      hero: Object.fromEntries(
+        (Object.keys(defaultHomeHero) as (keyof HomeHero)[]).map((k) => [
+          k,
+          String(data.hero?.[k] ?? defaultHomeHero[k]).slice(0, 600),
+        ]),
+      ) as HomeHero,
     };
     const { error } = await db
       .from("site_content")
