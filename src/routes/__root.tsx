@@ -17,6 +17,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartProvider } from "@/lib/cart";
+import { settingsQuery } from "@/lib/catalog.queries";
 
 function NotFoundComponent() {
   return (
