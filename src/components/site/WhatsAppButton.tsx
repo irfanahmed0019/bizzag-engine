@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { MessageCircle } from "lucide-react";
 import { settingsQuery } from "@/lib/catalog.queries";
 import { buildGeneralMessage, whatsappHref } from "@/lib/whatsapp";
 import { defaultSettings } from "@/lib/catalog.functions";
 
 export function useSettings() {
-  const { data } = useQuery(settingsQuery);
+  const { data } = useSuspenseQuery(settingsQuery);
   return data ?? defaultSettings;
 }
 
