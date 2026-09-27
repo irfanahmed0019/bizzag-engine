@@ -73,16 +73,14 @@ export function buildCartMessage(input: {
   lines.push(DIVIDER);
   input.items.forEach((item, index) => {
     lines.push(`${index + 1}. ${item.name}`);
-    lines.push(`   Price: ${formatINR(item.price)}`);
-    lines.push(`   Quantity: ${item.qty}`);
+    lines.push(`Price: ${formatINR(item.price)}`);
+    lines.push(`Quantity: ${item.qty}`);
     const picked = item.selections.filter((s) => s.label.trim() && s.value.trim());
-    for (const s of picked) lines.push(`   ${s.label}: ${s.value}`);
-    if (item.reference) lines.push(`   Customization Reference: ${item.reference}`);
-    lines.push("");
+    for (const s of picked) lines.push(`${s.label}: ${s.value}`);
+    if (item.reference) lines.push(`Reference: ${item.reference}`);
   });
   lines.push(DIVIDER);
   lines.push(`Estimated Total: ${formatINR(input.total)}`);
-  lines.push("");
   lines.push(input.url);
   lines.push("");
   lines.push("Please confirm availability and the next steps. Thank you!");
