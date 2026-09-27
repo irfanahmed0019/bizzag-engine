@@ -115,7 +115,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
   }),
 
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(settingsQuery);
+  },
+
   shellComponent: RootShell,
+
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
