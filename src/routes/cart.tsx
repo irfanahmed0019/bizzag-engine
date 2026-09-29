@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Minus, Plus, ShoppingBag, Trash2, MessageCircle } from "lucide-react";
 import { formatINR } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useSettings } from "@/components/site/WhatsAppButton";
 import { buildCartMessage, whatsappHref } from "@/lib/whatsapp";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -29,8 +30,19 @@ export const Route = createFileRoute("/cart")({
 function CartPage() {
   const { items, total, setQty, remove, clear } = useCart();
   const settings = useSettings();
+  const navigate = useNavigate();
 
-  function orderAll() {
+  async function orderAll() {
+    const { data: authData } = await supabase.auth.getUser();
+    if (!authData.user) {
+      await navigate({ to: "/account" });
+      return;
+    }
+    const { data: profile } = await supabase.from("profiles").select("full_name,phone,address_line,city,state,postal_code").eq("user_id", authData.user.id).maybeSingle();
+    if (!profile?.full_name || !profile.phone || !profile.address_line || !profile.city || !profile.state || !profile.postal_code) {
+      await navigate({ to: "/account" });
+      return;
+    }
     const message = buildCartMessage({
       greeting: settings.whatsappGreeting,
       items: items.map((i) => ({
@@ -42,6 +54,14 @@ function CartPage() {
       })),
       total,
       url: typeof window !== "undefined" ? `${window.location.origin}/shop` : "",
+      delivery: {
+        name: profile.full_name,
+        phone: profile.phone,
+        address: profile.address_line,
+        city: profile.city,
+        state: profile.state,
+        postalCode: profile.postal_code,
+      },
     });
     window.open(whatsappHref(settings, message), "_blank", "noopener,noreferrer");
   }
@@ -133,7 +153,7 @@ function CartPage() {
               onClick={orderAll}
               className="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#25D366] py-3.5 text-sm font-semibold text-white hover:opacity-90"
             >
-              <MessageCircle className="size-4" /> Order via WhatsApp
+              <MessageCircle className="size-4" /> Continue to WhatsApp
             </button>
             <button
               onClick={clear}
