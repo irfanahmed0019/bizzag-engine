@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Customer identity uses Lovable Cloud Google auth and a private RLS-scoped `profiles` row, because delivery details must never be shared between users.

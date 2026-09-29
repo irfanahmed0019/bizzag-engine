@@ -31,8 +31,8 @@ function Home() {
   const picks = products.filter((p) => !trending.includes(p)).slice(0, 6);
 
   return <div>
-    <section className="bizzag-hero bizzag-hero--home relative min-h-[300px] text-white sm:min-h-[500px]" style={h.image ? { backgroundImage: `linear-gradient(90deg, rgba(5,5,5,.85), rgba(5,5,5,.2)), url(${h.image})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}>
-      <div className="relative z-10 mx-auto flex min-h-[300px] max-w-[1400px] items-center px-4 py-10 sm:min-h-[500px] sm:px-6 sm:py-16 lg:min-h-[560px]">
+    <section className="bizzag-hero bizzag-hero--home relative text-white" style={h.image ? { backgroundImage: `linear-gradient(90deg, rgba(5,5,5,.85), rgba(5,5,5,.2)), url(${h.image})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}>
+      <div className="bizzag-home-hero-content relative z-10 mx-auto flex max-w-[1400px] items-center px-4 py-10 sm:min-h-[500px] sm:px-6 sm:py-16 lg:min-h-[560px]">
         <div className="max-w-[680px]">
           <p className="eyebrow">{h.eyebrow} <span className="ml-3 inline-block h-px w-10 bg-bizzag-orange align-middle"/></p>
           <h1 className="mt-3 text-5xl font-black sm:mt-5 uppercase leading-[.8] tracking-[-.075em] sm:text-8xl lg:text-[96px]">{titleWords.slice(0, mid).join(" ")}<br/>{titleWords.slice(mid).join(" ")}<span className="text-bizzag-orange">.</span></h1>

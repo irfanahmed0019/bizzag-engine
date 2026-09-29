@@ -2,6 +2,7 @@ import type { SiteSettings } from "./catalog.functions";
 import { formatINR } from "./products";
 
 export type OrderLine = { label: string; value: string };
+export type DeliveryDetails = { name: string; phone: string; address: string; city: string; state: string; postalCode: string };
 
 const DIVIDER = "━━━━━━━━━━━━━━";
 
@@ -65,6 +66,7 @@ export function buildCartMessage(input: {
   }[];
   total: number;
   url: string;
+  delivery?: DeliveryDetails;
 }) {
   const lines: string[] = [];
   lines.push(input.greeting.trim() || "Hello BIZZAG!");
@@ -81,6 +83,14 @@ export function buildCartMessage(input: {
   });
   lines.push(DIVIDER);
   lines.push(`Estimated Total: ${formatINR(input.total)}`);
+  if (input.delivery) {
+    lines.push("");
+    lines.push("DELIVERY DETAILS");
+    lines.push(`Name: ${input.delivery.name}`);
+    lines.push(`Phone: ${input.delivery.phone}`);
+    lines.push(`Address: ${input.delivery.address}`);
+    lines.push(`${input.delivery.city}, ${input.delivery.state} - ${input.delivery.postalCode}`);
+  }
   lines.push(input.url);
   lines.push("");
   lines.push("Please confirm availability and the next steps. Thank you!");
