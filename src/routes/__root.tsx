@@ -16,6 +16,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { MobileBottomNav } from "@/components/site/MobileBottomNav";
 import { CartProvider } from "@/lib/cart";
 import { settingsQuery } from "@/lib/catalog.queries";
 
@@ -167,7 +168,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col pb-20 sm:pb-0">
           <Header />
           <main key={pathname} className="page-enter flex-1">
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -176,6 +177,7 @@ function RootComponent() {
 
           <MadeByIrfan />
           <Footer />
+          <MobileBottomNav />
           
         </div>
       </CartProvider>
