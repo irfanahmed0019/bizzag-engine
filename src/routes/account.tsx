@@ -57,7 +57,7 @@ function AccountPage() {
     if (!user) return;
     setSaving(true);
     setMessage("");
-    const { error } = await supabase.from("profiles").upsert({ user_id: user.id, ...profile, avatar_url: String(user.user_metadata.avatar_url ?? "") });
+    const { error } = await supabase.from("profiles").upsert({ user_id: user.id, ...profile, avatar_url: String(user.user_metadata["avatar_url"] ?? "") });
     setMessage(error ? "Could not save your address. Please try again." : "Delivery details saved.");
     setSaving(false);
   }
