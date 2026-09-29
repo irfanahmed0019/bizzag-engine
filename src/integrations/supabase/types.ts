@@ -214,6 +214,45 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          address_line: string
+          avatar_url: string
+          city: string
+          created_at: string
+          full_name: string
+          phone: string
+          postal_code: string
+          state: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address_line?: string
+          avatar_url?: string
+          city?: string
+          created_at?: string
+          full_name?: string
+          phone?: string
+          postal_code?: string
+          state?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address_line?: string
+          avatar_url?: string
+          city?: string
+          created_at?: string
+          full_name?: string
+          phone?: string
+          postal_code?: string
+          state?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           key: string
