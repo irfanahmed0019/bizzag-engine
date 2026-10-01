@@ -22,7 +22,7 @@ export const Route = createFileRoute("/admin")({
     ],
   }),
   errorComponent: ({ error }) => (
-    <p className="p-16 text-center text-sm text-muted-foreground">{error.message}</p>
+    <p className="p-16 text-center text-sm text-muted-foreground">{error instanceof Error ? error.message : "This page could not load."}</p>
   ),
   notFoundComponent: () => <p className="p-16 text-center text-sm">Not found.</p>,
   component: AdminLayout,
