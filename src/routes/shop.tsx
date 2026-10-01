@@ -7,7 +7,8 @@ import { bizzagFallbackProducts } from "@/lib/bizzag";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/shop")({
-  validateSearch: (search: Record<string, unknown>): { category?: string } => ({ category: typeof search["category"] === "string" ? search["category"] : undefined }),
+  validateSearch: (search: Record<string, unknown>): { category?: string } =>
+    typeof search["category"] === "string" ? { category: search["category"] } : {},
   loader:({context})=>Promise.all([context.queryClient.ensureQueryData(productsQuery), context.queryClient.ensureQueryData(categoriesQuery)]),
   head:()=>({meta:[
     {title:"Shop — BIZZAG"},
