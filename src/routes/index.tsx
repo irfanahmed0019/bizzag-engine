@@ -1,12 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Flame, Heart, Sparkles } from "lucide-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { productsQuery, homeQuery } from "@/lib/catalog.queries";
-import { BIZZAG_CATEGORIES, bizzagFallbackProducts } from "@/lib/bizzag";
+import { productsQuery, homeQuery, categoriesQuery } from "@/lib/catalog.queries";
+import { bizzagFallbackProducts } from "@/lib/bizzag";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => Promise.all([context.queryClient.ensureQueryData(productsQuery), context.queryClient.ensureQueryData(homeQuery)]),
+  loader: ({ context }) => Promise.all([
+    context.queryClient.ensureQueryData(productsQuery),
+    context.queryClient.ensureQueryData(homeQuery),
+    context.queryClient.ensureQueryData(categoriesQuery),
+  ]),
   head: () => ({ meta: [
     { title: "BIZZAG — BE YOUR STYLE. Trending Fashion in India" },
     { name: "description", content: "Shop trending streetwear, oversized tees, sneakers, watches and new drops at everyday prices. Order easily on WhatsApp." },
@@ -23,6 +27,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { data } = useSuspenseQuery(productsQuery);
   const { data: home } = useSuspenseQuery(homeQuery);
+  const { data: categories } = useSuspenseQuery(categoriesQuery);
   const h = home.hero;
   const titleWords = h.title.replace(/\.$/, "").split(" ");
   const mid = Math.ceil(titleWords.length / 2);
@@ -47,9 +52,9 @@ function Home() {
 
     <section className="border-b border-black/5 bg-white py-4 sm:py-6">
       <div className="bizzag-circle-nav mx-auto flex max-w-[1400px] snap-x gap-3 overflow-x-auto px-4 pb-1 sm:gap-5 sm:px-6">
-        {BIZZAG_CATEGORIES.slice(0,10).map((c,i) => <Link key={c.slug} to="/shop" className="group min-w-[68px] snap-start text-center sm:min-w-[82px]">
-          <div className={`mx-auto grid size-14 sm:size-[72px] place-items-center overflow-hidden rounded-full border ${i===9?'border-bizzag-orange bg-bizzag-orange':'border-black/5 bg-[#f0f0f0]'}`}>
-            <img src={c.image} alt="" className="size-full object-cover mix-blend-multiply transition group-hover:scale-105"/>
+        {categories.slice(0, 10).map((c) => <Link key={c.slug} to="/shop" search={{ category: c.slug }} className="group min-w-[68px] snap-start text-center sm:min-w-[82px]">
+          <div className="mx-auto grid size-14 place-items-center overflow-hidden rounded-full border border-black/5 bg-secondary sm:size-[72px]">
+            {c.image ? <img src={c.image} alt={c.name} className="size-full object-cover transition group-hover:scale-105"/> : <span className="px-2 text-[9px] font-bold uppercase">{c.name}</span>}
           </div>
           <span className="mt-2 block text-[11px] font-semibold whitespace-nowrap">{c.name}</span>
         </Link>)}
