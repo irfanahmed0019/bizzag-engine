@@ -53,7 +53,7 @@ function Home() {
 
     <section className="border-b border-black/5 bg-white py-4 sm:py-6">
       <div className="bizzag-circle-nav mx-auto flex max-w-[1400px] snap-x gap-3 overflow-x-auto px-4 pb-1 sm:gap-5 sm:px-6">
-        {categories.slice(0, 10).map((c) => <Link key={c.slug} to="/shop" search={{ category: c.slug }} className="group min-w-[68px] snap-start text-center sm:min-w-[82px]">
+        {categories.map((c) => <Link key={c.slug} to="/shop" search={{ category: c.slug }} className="group min-w-[68px] snap-start text-center sm:min-w-[82px]">
           <div className="mx-auto grid size-14 place-items-center overflow-hidden rounded-full border border-black/5 bg-secondary sm:size-[72px]">
             {c.image ? <img src={c.image} alt={c.name} className="size-full object-cover transition group-hover:scale-105"/> : <span className="px-2 text-[9px] font-bold uppercase">{c.name}</span>}
           </div>

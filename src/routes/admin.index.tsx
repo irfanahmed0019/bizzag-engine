@@ -853,6 +853,7 @@ function CategoriesEditor() {
   const [items, setItems] = useState<CategoryItem[]>([]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
+  const [uploading, setUploading] = useState<number | null>(null);
 
   useEffect(() => {
     if (data) setItems(data);
@@ -871,10 +872,19 @@ function CategoriesEditor() {
     });
   }
   async function uploadPhoto(i: number, file: File) {
-    const { url } = await adminUploadImage({
-      data: { filename: file.name, contentType: file.type, base64: await fileToBase64(file) },
-    });
-    update(i, { image: url });
+    setMsg("");
+    setUploading(i);
+    try {
+      const { url } = await adminUploadImage({
+        data: { filename: file.name, contentType: file.type, base64: await fileToBase64(file) },
+      });
+      update(i, { image: url });
+      setMsg("Photo uploaded. Save categories to show it on the site.");
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : "Photo upload failed.");
+    } finally {
+      setUploading(null);
+    }
   }
 
   async function save() {
@@ -939,7 +949,7 @@ function CategoriesEditor() {
             </div>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-xs hover:border-primary">
-                <Upload className="size-3.5" /> Change photo
+                <Upload className="size-3.5" /> {uploading === i ? "Uploading…" : c.image ? "Change photo" : "Add photo"}
                 <input
                   type="file"
                   accept="image/*"
@@ -947,9 +957,11 @@ function CategoriesEditor() {
                   onChange={(e) => {
                     const f = e.target.files?.[0];
                     if (f) void uploadPhoto(i, f);
+                    e.target.value = "";
                   }}
                 />
               </label>
+              {c.image && <button type="button" onClick={() => update(i, { image: "" })} className="text-xs text-muted-foreground underline">Remove photo</button>}
               <button
                 type="button"
                 onClick={() => move(i, -1)}
