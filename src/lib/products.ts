@@ -10,7 +10,7 @@ import { BIZZAG_CATEGORIES } from "./bizzag";
 
 // CDN asset pointers are relative to Lovable's asset host. When the app is
 // deployed elsewhere (e.g. Vercel) those paths 404, so make them absolute.
-const ASSET_HOST = "https://fizz-flame.lovable.app";
+const ASSET_HOST = (import.meta.env.VITE_ASSET_HOST as string | undefined) ?? "https://bizzag.lovable.app";
 export function assetUrl(url: string) {
   return url.startsWith("/__l5e/") ? `${ASSET_HOST}${url}` : url;
 }
