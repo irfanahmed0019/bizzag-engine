@@ -1,10 +1,36 @@
+// Bounded defense in depth per server instance. Serverless instances do not
+// share memory; use an edge firewall/shared store for fleet-wide enforcement.
+const WINDOW_MS = 15 * 60 * 1000;
+const MAX_ATTEMPTS = 5;
+const MAX_CLIENTS = 10000;
+const attempts = new Map<string, { count: number; expires: number }>();
+
+function allowAdminLogin(headers: Headers, now = Date.now()): boolean {
+  // Vercel sets this header at its edge. Do not trust arbitrary forwarded
+  // headers on other hosts; group those requests under a single safe bucket.
+  const ip = process.env.VERCEL
+    ? (headers.get("x-vercel-forwarded-for") ?? "unknown").split(",")[0].trim().slice(0, 128)
+    : "local";
+  for (const [key, value] of attempts) if (value.expires <= now) attempts.delete(key);
+  const entry = attempts.get(ip);
+  if (entry) {
+    if (entry.count >= MAX_ATTEMPTS) return false;
+    entry.count++;
+    return true;
+  }
+  // Fail closed rather than evict active limits when memory is at capacity.
+  if (attempts.size >= MAX_CLIENTS) return false;
+  attempts.set(ip, { count: 1, expires: now + WINDOW_MS });
+  return true;
+}
+
 import { createServerFn } from "@tanstack/react-start";
 import type { AdminSession } from "./catalog.server";
 
 export const adminLogin = createServerFn({ method: "POST" })
   .inputValidator((data: { email: string; password: string }) => data)
   .handler(async ({ data }) => {
-    const { useSession } = await import("@tanstack/react-start/server");
+    const { useSession, getRequest } = await import("@tanstack/react-start/server");
     const { createHash, timingSafeEqual } = await import("node:crypto");
     const { sessionConfig } = await import("./catalog.server");
 
@@ -13,6 +39,8 @@ export const adminLogin = createServerFn({ method: "POST" })
         createHash("sha256").update(input, "utf8").digest(),
         createHash("sha256").update(expected, "utf8").digest(),
       );
+
+    if (!allowAdminLogin(getRequest().headers)) return { ok: false as const };
 
     const email = process.env["ADMIN_EMAIL"];
     const password = process.env["ADMIN_PASSWORD"];
