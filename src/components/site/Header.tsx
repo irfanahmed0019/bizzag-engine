@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, MessageCircle, Search, ShoppingCart, UserRound, X } from "lucide-react";
+import { Menu, MessageCircle, Search, ShoppingCart, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { formatINR } from "@/lib/products";
@@ -61,7 +61,6 @@ export function Header() {
             <button aria-label="Search" onClick={() => setSearchOpen((v) => !v)} className="grid size-10 place-items-center rounded-full hover:bg-black/5">
               {searchOpen ? <X className="size-[18px]" /> : <Search className="size-[18px]" />}
             </button>
-            <Link to="/account" aria-label="Account" className="hidden size-10 place-items-center rounded-full hover:bg-black/5 sm:grid"><UserRound className="size-[18px]" /></Link>
             <Link to="/cart" aria-label="Cart" className="relative grid size-10 place-items-center rounded-full hover:bg-black/5">
               <ShoppingCart className="size-[19px]" />
               {count > 0 && <span className="absolute right-0 top-0 grid min-w-4 place-items-center rounded-full bg-bizzag-orange px-1 text-[9px] font-bold text-white">{count}</span>}
@@ -87,3 +86,4 @@ export function Header() {
     </header>
   );
 }
+
