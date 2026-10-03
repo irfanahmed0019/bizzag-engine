@@ -5,7 +5,12 @@ export const Route = createFileRoute("/api/public/media/$")({
     handlers: {
       GET: async ({ params }) => {
         const path = params._splat ?? "";
-        if (!path || path.includes("..")) return new Response("Not found", { status: 404 });
+        // Only canonical public product paths are eligible. Customer files must
+        // never be served by this public proxy, including encoded variants.
+        if (!path || /[%\\\x00-\x1f]/.test(path) ||
+            path.split("/").some((segment) => !segment || segment === "." || segment === ".." || segment.toLowerCase() === "customer")) {
+          return new Response("Not found", { status: 404 });
+        }
 
         const { publicClient, PRODUCT_BUCKET } = await import("@/lib/catalog.server");
 
@@ -18,23 +23,12 @@ export const Route = createFileRoute("/api/public/media/$")({
           blob = null;
         }
 
-        // Fall back to the privileged client when it is configured.
-        if (!blob) {
-          try {
-            const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-            const res = await supabaseAdmin.storage.from(PRODUCT_BUCKET).download(path);
-            if (res.data) blob = res.data;
-          } catch {
-            blob = null;
-          }
-        }
-
         if (!blob) return new Response("Not found", { status: 404 });
 
         return new Response(await blob.arrayBuffer(), {
           headers: {
             "Content-Type": blob.type || "image/jpeg",
-            "Cache-Control": "public, max-age=31536000, immutable",
+            "Cache-Control": "public, max-age=300",
           },
         });
       },
