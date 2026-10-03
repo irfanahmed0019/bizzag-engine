@@ -1,8 +1,9 @@
 import type { Product, Category } from "./products";
+const cdn = (u: string) => (u.startsWith("/__l5e/") ? `${(import.meta.env.VITE_ASSET_HOST as string | undefined) ?? "https://bizzag.lovable.app"}${u}` : u);
 
 export const BIZZAG_CATEGORIES: Category[] = [
   { slug: "t-shirts", name: "T-Shirts", tagline: "Everyday essentials.", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85" },
-  { slug: "shirts", name: "Shirts", tagline: "Clean. Classic. Always in style.", image: "https://bizzag.lovable.app/__l5e/assets-v1/6f06959a-11d9-454f-9c58-66d887450a4e/bizzag-category-shirts.jpg" },
+  { slug: "shirts", name: "Shirts", tagline: "Clean. Classic. Always in style.", image: cdn("/__l5e/assets-v1/6f06959a-11d9-454f-9c58-66d887450a4e/bizzag-category-shirts.jpg") },
   { slug: "oversized", name: "Oversized", tagline: "Bigger fits. Bolder energy.", image: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85" },
   { slug: "bottomwear", name: "Bottomwear", tagline: "Built for every move.", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85" },
   { slug: "footwear", name: "Footwear", tagline: "Step up your style.", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85" },
@@ -16,7 +17,7 @@ export const BIZZAG_CATEGORIES: Category[] = [
 
 const images = {
   tee: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=88",
-  shirt: "https://bizzag.lovable.app/__l5e/assets-v1/6f06959a-11d9-454f-9c58-66d887450a4e/bizzag-category-shirts.jpg",
+  shirt: cdn("/__l5e/assets-v1/6f06959a-11d9-454f-9c58-66d887450a4e/bizzag-category-shirts.jpg"),
   cargo: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=88",
   sneaker: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=88",
   jersey: "https://images.unsplash.com/photo-1526232761682-d26e03ac9e6b?auto=format&fit=crop&w=1000&q=88",
