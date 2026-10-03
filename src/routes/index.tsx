@@ -4,6 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { productsQuery, homeQuery, categoriesQuery } from "@/lib/catalog.queries";
 import { bizzagFallbackProducts } from "@/lib/bizzag";
 import { ProductCard } from "@/components/site/ProductCard";
+import heroAsset from "@/assets/bizzag-hero-new.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => Promise.all([
@@ -36,7 +37,7 @@ function Home() {
   const picks = products.filter((p) => !trending.includes(p)).slice(0, 6);
 
   return <div>
-    <section className="bizzag-hero bizzag-hero--home relative text-white" style={h.image ? { backgroundImage: `linear-gradient(90deg, rgba(5,5,5,.85), rgba(5,5,5,.2)), url(${h.image})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}>
+    <section className="bizzag-hero bizzag-hero--home relative text-primary-foreground" style={{ backgroundImage: `url("${h.image || heroAsset.url}")` }}>
       <div className="bizzag-home-hero-content relative z-10 mx-auto flex max-w-[1400px] items-center px-4 py-10 sm:min-h-[500px] sm:px-6 sm:py-16 lg:min-h-[560px]">
         <div className="max-w-[680px]">
           <p className="eyebrow">{h.eyebrow} <span className="ml-3 inline-block h-px w-10 bg-bizzag-orange align-middle"/></p>
@@ -97,6 +98,19 @@ function Home() {
       </div>
       <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-6">{picks.map(p=><ProductCard key={p.id} product={p}/>)}</div>
     </section>
+
+    {(["t-shirts", "oversized"] as const).map((slug) => {
+      const category = categories.find((c) => c.slug === slug);
+      const items = products.filter((p) => p.category === slug).slice(0, 5);
+      if (!category || !items.length) return null;
+      return <section key={slug} className="mx-auto max-w-[1400px] px-4 pb-10 sm:px-6 sm:pb-14">
+        <div className="mb-4 flex items-end justify-between sm:mb-6">
+          <h2 className="text-xl font-black uppercase sm:text-3xl">{category.name}</h2>
+          <Link to="/shop" search={{ category: slug }} className="flex items-center text-xs font-bold text-accent">View All <ArrowRight className="ml-1 size-4" /></Link>
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">{items.map((p) => <ProductCard key={p.uid} product={p} />)}</div>
+      </section>;
+    })}
 
     <section className="border-y border-black/10 bg-[#fafafa] py-12">
       <div className="mx-auto grid max-w-[1200px] grid-cols-3 gap-3 px-4 text-center sm:gap-8 sm:px-6">

@@ -6,3 +6,5 @@
 - [x] Google customer login and private saved delivery profile
 - [x] Add customer delivery details to cart WhatsApp orders
 - [x] Mobile-first homepage banner with admin-controlled image and text
+- [x] Replace mismatched category photos, add Shirts, and show T-Shirts and Oversized products on the home page
+- [x] Replace the top banner photo while keeping banner image and text editable in admin

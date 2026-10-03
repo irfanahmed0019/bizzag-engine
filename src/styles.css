@@ -60,28 +60,14 @@ h1,h2,h3,h4 { font-family:var(--font-display); letter-spacing:-0.04em; }
 
 
 /* BIZZAG editorial storefront system */
-.bizzag-hero--home{min-height:560px;background-image:url("/bizzag/home-hero.jpg")}
-.bizzag-hero--home::before{
-  content:"GOOD STYLE\A BETTER DAYS.";
-  white-space:pre;
-  position:absolute;
-  right:5%;
-  top:22%;
-  color:rgba(255,255,255,.86);
-  font-size:clamp(1.3rem,2.5vw,2.4rem);
-  line-height:.92;
-  font-weight:900;
-  transform:rotate(-5deg);
-  letter-spacing:-.06em;
-  pointer-events:none;
-}
+.bizzag-hero--home{min-height:560px;background-size:cover;background-position:center}
 .bizzag-hero--about{background-image:url("/bizzag/about-hero.jpg");background-position:right center}
 .bizzag-hero--contact{background-image:url("/bizzag/contact-hero.jpg");background-position:right center}
 .bizzag-hero--collections{background-image:url("/bizzag/collections-hero.jpg");background-position:right center}
 .bizzag-hero--drops{background-image:url("/bizzag/new-drops-hero.jpg");background-position:right center}
 .bizzag-hero--shop{background-image:url("/bizzag/shop-hero.jpg");background-position:right center}
 
-@media (max-width:639px){.bizzag-hero--home{min-height:520px;background-size:auto 58%;background-position:center top;background-color:#050505}.bizzag-hero--home::before{display:none}.bizzag-hero--home::after{background:linear-gradient(180deg,transparent 0%,transparent 42%,rgba(5,5,5,.72) 55%,#050505 64%)}.bizzag-home-hero-content{min-height:520px;align-items:flex-end;padding-bottom:28px}.bizzag-editorial-card{min-height:220px}}
+@media (max-width:639px){.bizzag-hero--home{min-height:520px;background-size:auto 58%;background-position:center top;background-color:#050505}.bizzag-hero--home::after{background:linear-gradient(180deg,transparent 0%,transparent 42%,rgba(5,5,5,.72) 55%,#050505 64%)}.bizzag-home-hero-content{min-height:520px;align-items:flex-end;padding-bottom:28px}.bizzag-editorial-card{min-height:220px}}
 .bizzag-circle-nav::-webkit-scrollbar{display:none}
 .bizzag-circle-nav{scrollbar-width:none}
 .bizzag-product-grid > article{box-shadow:0 1px 0 rgba(0,0,0,.04)}
