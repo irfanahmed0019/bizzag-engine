@@ -3,7 +3,7 @@ import { WhatsAppLink } from "@/components/site/WhatsAppButton";
 
 const items = [
   { icon: MessageCircle, title: "Real people on WhatsApp", note: "Ask anything before you order. We reply personally." },
-  { icon: RotateCcw, title: "Easy exchange help", note: "Wrong size or an issue? Message us on WhatsApp and we'll sort it out." },
+  { icon: RotateCcw, title: "7-day exchange", note: "Wrong size or an issue? Message us on WhatsApp within 7 days for an exchange." },
   { icon: Truck, title: "Delivery confirmed upfront", note: "Delivery time and charges are confirmed with you on WhatsApp before you pay." },
   { icon: ShieldCheck, title: "No payment on the website", note: "Nothing is charged online. Your order is confirmed with you directly on WhatsApp." },
 ];
@@ -37,7 +37,7 @@ export function HomeTrustStrip() {
 export function ProductTrust() {
   return (
     <div className="space-y-2 rounded-md border border-border bg-secondary/40 p-4 text-xs leading-5 text-muted-foreground">
-      <p className="flex items-start gap-2"><RotateCcw className="mt-0.5 size-4 shrink-0" /> <span><b className="text-foreground">Easy exchange help.</b> Wrong size or an issue? Message us on WhatsApp and we'll sort it out.</span></p>
+      <p className="flex items-start gap-2"><RotateCcw className="mt-0.5 size-4 shrink-0" /> <span><b className="text-foreground">7-day exchange.</b> Wrong size or an issue? Message us on WhatsApp within 7 days for an exchange.</span></p>
       <p className="flex items-start gap-2"><ShieldCheck className="mt-0.5 size-4 shrink-0" /> <span><b className="text-foreground">No online payment.</b> Order details and payment are confirmed with you on WhatsApp.</span></p>
       <p className="flex items-start gap-2"><MessageCircle className="mt-0.5 size-4 shrink-0" /> <span><b className="text-foreground">Questions before you order?</b> <WhatsAppLink className="font-semibold text-[#128C7E] underline" label="Chat on WhatsApp">Chat with us on WhatsApp</WhatsAppLink></span></p>
     </div>
@@ -50,7 +50,7 @@ export function CartTrust() {
     <ul className="mt-4 space-y-2 text-xs text-muted-foreground">
       <li className="flex items-start gap-2"><ShieldCheck className="mt-0.5 size-4 shrink-0" /> Nothing is charged on the website. We confirm your order and payment on WhatsApp.</li>
       <li className="flex items-start gap-2"><Truck className="mt-0.5 size-4 shrink-0" /> Delivery time and charges are confirmed with you before you pay.</li>
-      <li className="flex items-start gap-2"><RotateCcw className="mt-0.5 size-4 shrink-0" /> Wrong size? Message us on WhatsApp for exchange help.</li>
+      <li className="flex items-start gap-2"><RotateCcw className="mt-0.5 size-4 shrink-0" /> 7-day exchange: wrong size or an issue? Message us on WhatsApp within 7 days.</li>
     </ul>
   );
 }
