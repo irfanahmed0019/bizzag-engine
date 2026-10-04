@@ -23,12 +23,12 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
 // from cross-site requests.
 const csrfMiddleware = createCsrfMiddleware({
   filter: (ctx) => ctx.handlerType === "serverFn",
-  // Same-origin plus the Lovable preview/published hosts, which the editor
-  // serves inside an iframe.
+  // Only this storefront may make credentialed cross-origin calls.
   origin: (origin, ctx) => {
     try {
       if (origin === new URL(ctx.request.url).origin) return true;
-      return new URL(origin).hostname.endsWith(".lovable.app");
+      const allowed = new URL(origin);
+      return allowed.protocol === "https:" && allowed.host === "bizzag.lovable.app";
     } catch {
       return false;
     }
