@@ -55,7 +55,7 @@ function Home() {
       <div className="bizzag-circle-nav mx-auto flex max-w-[1400px] snap-x gap-3 overflow-x-auto px-4 pb-1 sm:gap-5 sm:px-6">
         {categories.map((c) => <Link key={c.slug} to="/shop" search={{ category: c.slug }} className="group min-w-[68px] snap-start text-center sm:min-w-[82px]">
           <div className="mx-auto grid size-14 place-items-center overflow-hidden rounded-full border border-black/5 bg-secondary sm:size-[72px]">
-            {c.image ? <img src={c.image} alt={c.name} className="size-full object-cover transition group-hover:scale-105"/> : <span className="px-2 text-[9px] font-bold uppercase">{c.name}</span>}
+            {c.image ? <img src={c.image} alt={c.name} loading="lazy" decoding="async" width={72} height={72} className="size-full object-cover transition group-hover:scale-105"/> : <span className="px-2 text-[9px] font-bold uppercase">{c.name}</span>}
           </div>
           <span className="mt-2 block text-[11px] font-semibold whitespace-nowrap">{c.name}</span>
         </Link>)}
@@ -72,7 +72,7 @@ function Home() {
 
     <section className="mx-auto grid max-w-[1400px] gap-4 px-4 pb-8 sm:px-6 sm:pb-12 lg:grid-cols-2">
       <Link to="/new-drops" className="bizzag-editorial-card rounded-xl">
-        <img src={h.banner1Image} alt="" className="absolute inset-0 size-full object-cover opacity-65"/>
+        <img src={h.banner1Image} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover opacity-65"/>
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent"/>
         <div className="relative z-10 flex min-h-[220px] flex-col justify-end p-5 sm:min-h-[320px] sm:p-8 text-white">
           <p className="eyebrow">{h.banner1Eyebrow}</p><h2 className="mt-2 max-w-sm text-2xl sm:mt-3 sm:text-4xl font-black uppercase leading-[.9]">{h.banner1Title}</h2>
@@ -81,7 +81,7 @@ function Home() {
         </div>
       </Link>
       <Link to="/about" className="bizzag-editorial-card rounded-xl">
-        <img src={h.banner2Image} alt="" className="absolute inset-0 size-full object-cover opacity-40"/>
+        <img src={h.banner2Image} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover opacity-40"/>
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10"/>
         <div className="relative z-10 flex min-h-[220px] flex-col justify-end p-5 sm:min-h-[320px] sm:p-8 text-black">
           <p className="eyebrow text-black">{h.banner2Eyebrow}</p><h2 className="mt-2 max-w-md text-2xl sm:mt-3 sm:text-4xl font-black uppercase leading-[.9]">{h.banner2Title}</h2>
