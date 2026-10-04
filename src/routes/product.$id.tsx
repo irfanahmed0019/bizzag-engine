@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ProductTrust } from "@/components/site/Trust";
 import {
   Award,
   Check,
@@ -564,6 +565,7 @@ function ProductPage() {
                 <p className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Truck className="size-4" /> {settings.deliveryText}
                 </p>
+                <ProductTrust />
               </div>
             </div>
           </div>
