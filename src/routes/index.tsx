@@ -5,6 +5,7 @@ import { productsQuery, homeQuery, categoriesQuery } from "@/lib/catalog.queries
 import { bizzagFallbackProducts } from "@/lib/bizzag";
 import { ProductCard } from "@/components/site/ProductCard";
 import heroAsset from "@/assets/bizzag-hero-new.jpg.asset.json";
+import { assetUrl } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => Promise.all([
@@ -37,7 +38,7 @@ function Home() {
   const picks = products.filter((p) => !trending.includes(p)).slice(0, 6);
 
   return <div>
-    <section className="bizzag-hero bizzag-hero--home relative text-primary-foreground" style={{ backgroundImage: `url("${h.image || heroAsset.url}")` }}>
+    <section className="bizzag-hero bizzag-hero--home relative text-primary-foreground" style={{ backgroundImage: `url("${h.image || assetUrl(heroAsset.url)}")` }}>
       <div className="bizzag-home-hero-content relative z-10 mx-auto flex max-w-[1400px] items-center px-4 py-10 sm:min-h-[500px] sm:px-6 sm:py-16 lg:min-h-[560px]">
         <div className="max-w-[680px]">
           <p className="eyebrow">{h.eyebrow} <span className="ml-3 inline-block h-px w-10 bg-bizzag-orange align-middle"/></p>
