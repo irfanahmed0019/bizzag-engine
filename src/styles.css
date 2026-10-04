@@ -79,3 +79,12 @@ h1,h2,h3,h4 { font-family:var(--font-display); letter-spacing:-0.04em; }
 .bizzag-faq details{border-bottom:1px solid #ddd}
 .bizzag-faq summary{cursor:pointer;list-style:none;padding:18px 0;font-size:.9rem;font-weight:700}
 .bizzag-faq summary::-webkit-details-marker{display:none}
+
+/* Load the existing Inter face directly, without a blocking Google CSS request. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2") format("woff2");
+}
