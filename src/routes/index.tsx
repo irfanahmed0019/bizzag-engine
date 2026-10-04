@@ -6,6 +6,7 @@ import { bizzagFallbackProducts } from "@/lib/bizzag";
 import { ProductCard } from "@/components/site/ProductCard";
 import heroAsset from "@/assets/bizzag-hero-new.jpg.asset.json";
 import { assetUrl } from "@/lib/products";
+import { HomeTrustStrip } from "@/components/site/Trust";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => Promise.all([
@@ -112,6 +113,8 @@ function Home() {
         <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">{items.map((p) => <ProductCard key={p.uid} product={p} />)}</div>
       </section>;
     })}
+
+    <HomeTrustStrip />
 
     <section className="border-y border-black/10 bg-[#fafafa] py-12">
       <div className="mx-auto grid max-w-[1200px] grid-cols-3 gap-3 px-4 text-center sm:gap-8 sm:px-6">
