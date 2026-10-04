@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { createServerFn } from "@tanstack/react-start";
 import type {
   CustomField,
@@ -275,7 +276,11 @@ export const adminDeleteProduct = createServerFn({ method: "POST" })
   });
 
 export const adminUploadImage = createServerFn({ method: "POST" })
-  .inputValidator((data: { filename: string; contentType: string; base64: string }) => data)
+  .inputValidator(z.object({
+    filename: z.string().min(1).max(255),
+    contentType: z.enum(["image/jpeg", "image/png", "image/webp", "image/avif", "image/heic", "image/heif"]),
+    base64: z.string().min(4).max(12 * 1024 * 1024).regex(/^[A-Za-z0-9+/]*={0,2}$/),
+  }))
   .handler(async ({ data }): Promise<{ url: string }> => {
     const { requireAdmin, admin, PRODUCT_BUCKET } = await import("./catalog.server");
     await requireAdmin();
@@ -372,7 +377,11 @@ export const adminSaveSettings = createServerFn({ method: "POST" })
 /* ------------------------------------------------------------------ */
 
 export const uploadCustomerPhoto = createServerFn({ method: "POST" })
-  .inputValidator((data: { filename: string; contentType: string; base64: string }) => data)
+  .inputValidator(z.object({
+    filename: z.string().min(1).max(255),
+    contentType: z.enum(["image/jpeg", "image/png", "image/webp", "image/avif", "image/heic", "image/heif"]),
+    base64: z.string().min(4).max(12 * 1024 * 1024).regex(/^[A-Za-z0-9+/]*={0,2}$/),
+  }))
   .handler(async ({ data }): Promise<{ url: string }> => {
     const { admin, PRODUCT_BUCKET } = await import("./catalog.server");
     if (!/^image\/(jpeg|png|webp|avif|heic|heif)$/i.test(data.contentType)) {
@@ -380,8 +389,9 @@ export const uploadCustomerPhoto = createServerFn({ method: "POST" })
     }
     const bytes = Buffer.from(data.base64, "base64");
     if (bytes.length > 8 * 1024 * 1024) throw new Error("Each photo must be under 8MB");
+    const { randomUUID } = await import("node:crypto");
     const safe = data.filename.toLowerCase().replace(/[^a-z0-9.]+/g, "-").slice(-50);
-    const path = `customer/${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${safe}`;
+    const path = `customer/${randomUUID()}-${safe}`;
     const db = await admin();
     const { error } = await db.storage
       .from(PRODUCT_BUCKET)
@@ -401,7 +411,15 @@ export type RequestInput = {
 };
 
 export const createCustomizationRequest = createServerFn({ method: "POST" })
-  .inputValidator((data: RequestInput) => data)
+  .inputValidator(z.object({
+    productUid: z.string().min(1).max(160).nullable(),
+    productName: z.string().min(1).max(160),
+    productSlug: z.string().min(1).max(160),
+    quantity: z.number().int().min(1).max(99),
+    selections: z.array(z.object({ label: z.string().max(60), value: z.string().max(300) })).max(30),
+    images: z.array(z.string().max(2048)).max(12),
+    note: z.string().max(1000),
+  }))
   .handler(async ({ data }): Promise<{ reference: string }> => {
     const { admin, makeReference } = await import("./catalog.server");
     const db = await admin();
@@ -475,7 +493,13 @@ export type ContactMessageInput = {
 };
 
 export const submitContactMessage = createServerFn({ method: "POST" })
-  .inputValidator((data: ContactMessageInput) => data)
+  .inputValidator(z.object({
+    name: z.string().trim().min(1).max(100),
+    email: z.string().trim().email().max(255),
+    phone: z.string().max(30),
+    subject: z.string().max(140),
+    message: z.string().trim().min(1).max(2000),
+  }))
   .handler(async ({ data }) => {
     const { admin } = await import("./catalog.server");
     const name = String(data.name ?? "").trim();
@@ -605,7 +629,11 @@ export const adminDeleteMessage = createServerFn({ method: "POST" })
 /* ------------------------------------------------------------------ */
 
 export const trackEvent = createServerFn({ method: "POST" })
-  .inputValidator((data: { type: string; productUid?: string | null; productName?: string }) => data)
+  .inputValidator(z.object({
+    type: z.enum(["product_view", "whatsapp_click"]),
+    productUid: z.string().min(1).max(160).nullable().optional(),
+    productName: z.string().max(160).optional(),
+  }))
   .handler(async ({ data }) => {
     const { admin } = await import("./catalog.server");
     if (!["product_view", "whatsapp_click"].includes(data.type)) return { ok: false as const };
