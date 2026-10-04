@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, ShoppingBag, Trash2, MessageCircle } from "lucide-react";
 import { formatINR } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { CartTrust } from "@/components/site/Trust";
 import { useSettings } from "@/components/site/WhatsAppButton";
 import { buildCartMessage, whatsappHref } from "@/lib/whatsapp";
 
@@ -144,10 +145,10 @@ function CartPage() {
             <p className="mt-4 text-xs text-muted-foreground">
               Shipping and any customization charges are confirmed on WhatsApp.
             </p>
+            <CartTrust />
           </aside>
         </div>
       )}
     </div>
   );
 }
-
