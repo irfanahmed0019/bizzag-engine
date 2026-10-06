@@ -4,6 +4,13 @@
 
 **Live site:** https://bizzag.vercel.app
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/bizzag-desktop.png" alt="Bizzag on desktop" width="64%">
+  <img src="docs/screenshots/bizzag-mobile.png" alt="Bizzag on mobile" width="22%">
+</p>
+
 ## Features
 
 - Product catalogue with category circles, filters and sorting
