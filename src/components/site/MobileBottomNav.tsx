@@ -14,7 +14,7 @@ export function MobileBottomNav() {
   const { count } = useCart();
 
   return (
-    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-[60] grid h-16 grid-cols-4 overflow-hidden rounded-xl border border-border bg-background/95 shadow-2xl backdrop-blur-md sm:hidden">
+    <nav aria-label="Mobile navigation" className="brand-bottom fixed inset-x-3 bottom-3 z-[60] grid h-16 grid-cols-4 overflow-hidden rounded-xl border border-border bg-background/95 shadow-2xl backdrop-blur-md sm:hidden">
       {items.map(({ to, label, icon: Icon }) => {
         const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
         return (
