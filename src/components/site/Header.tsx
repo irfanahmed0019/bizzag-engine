@@ -33,11 +33,8 @@ export function Header() {
   }, [query, products]);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="flex items-center justify-between bg-black px-4 py-2 text-[10px] font-semibold tracking-[0.14em] text-white uppercase">
-        <span><span className="text-bizzag-orange">●</span> NEW DROP LIVE — TREND-LED FITS. EVERYDAY PRICES. <span className="text-bizzag-orange">●</span></span>
-        <span className="hidden tracking-normal normal-case sm:block">🚚 Free delivery on orders above ₹999</span>
-      </div>
+    <header className="brand-header sticky top-0 z-50">
+      <div className="brand-announcement"><span>YOUR FIT. YOUR WAY.</span><span>ORDER ON WHATSAPP ↗</span></div>
       <div className="border-b border-black/10 bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-[70px] max-w-[1400px] items-center gap-4 px-5">
           <button className="lg:hidden" aria-label="Open menu" onClick={() => setOpen((v) => !v)}>
@@ -86,4 +83,3 @@ export function Header() {
     </header>
   );
 }
-
