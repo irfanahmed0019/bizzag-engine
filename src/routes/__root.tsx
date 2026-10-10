@@ -154,10 +154,10 @@ function MadeByIrfan() {
       <p className="mx-auto max-w-7xl px-5 py-4 text-center text-xs text-muted-foreground">
         Made by{" "}
         <a
-          href="https://irfanbuild.netlify.app/"
+          href="https://irfanbuildz.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#2563eb] underline underline-offset-2 hover:opacity-80"
+          className="inline-block px-1.5 py-2 text-sm font-bold text-[#2563eb] underline underline-offset-4 hover:opacity-80"
         >
           Irfan
         </a>{" "}
