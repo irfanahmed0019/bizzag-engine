@@ -157,7 +157,7 @@ function MadeByIrfan() {
           href="https://irfanbuildz.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-1.5 py-2 text-sm font-bold text-[#2563eb] underline underline-offset-4 hover:opacity-80"
+          className="inline-block px-1.5 py-2 text-sm font-bold text-[#2563eb] underline underline-offset-4 hover:opacity-80" style={{ color: "#2563eb", textDecoration: "underline" }}
         >
           Irfan
         </a>{" "}
