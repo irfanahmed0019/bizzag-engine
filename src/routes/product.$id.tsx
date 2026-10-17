@@ -59,12 +59,12 @@ export const Route = createFileRoute("/product/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Product unavailable â BIZZAG" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Product unavailable — BIZZAG" }, { name: "robots", content: "noindex" }],
       };
     }
     const { product } = loaderData;
-    const title = `${product.name} â BIZZAG`;
-    const description = `${product.blurb}. ${formatINR(product.price)} â order personalised gifts on WhatsApp, delivered across India.`;
+    const title = `${product.name} — BIZZAG`;
+    const description = `${product.blurb}. ${formatINR(product.price)} — order personalised gifts on WhatsApp, delivered across India.`;
     return {
       meta: [
         { title },
@@ -460,7 +460,7 @@ function ProductPage() {
                       ) : (
                         <Upload className="size-5 text-gold" />
                       )}
-                      {uploading ? "Uploadingâ¦" : "Click or drop to upload"}
+                      {uploading ? "Uploading…" : "Click or drop to upload"}
                       <span className="text-[0.65rem]">JPG, PNG, WebP up to 8MB</span>
                       <input
                         type="file"
@@ -522,7 +522,7 @@ function ProductPage() {
                       </div>
                       <p className="mt-2 flex items-center gap-2 rounded-md bg-secondary px-3 py-2 text-xs text-muted-foreground">
                         <Sparkles className="size-3.5 text-gold" />
-                        Preview only â final product may have slight colour variations.
+                        Preview only — final product may have slight colour variations.
                       </p>
                     </div>
                   )}
