@@ -361,7 +361,7 @@ function ProductPage() {
 
             {product.mrp && product.mrp > product.price && (
               <p className="mt-1.5 text-sm font-semibold text-green-700">
-                You save {formatINR(product.mrp - product.price)} ({discount}% OFF)
+                {formatINR(product.mrp - product.price)} below the estimated reference price
               </p>
             )}
 
