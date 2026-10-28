@@ -20,7 +20,10 @@ import { Route as CustomFrameRouteImport } from './routes/custom-frame'
 import { Route as CustomizeRouteImport } from './routes/customize'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as NewDropsRouteImport } from './routes/new-drops'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as AdminProductUidRouteImport } from './routes/admin.product.$uid'
@@ -81,9 +84,24 @@ const NewDropsRoute = NewDropsRouteImport.update({
   path: '/new-drops',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingReturnsRoute = ShippingReturnsRouteImport.update({
+  id: '/shipping-returns',
+  path: '/shipping-returns',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -119,7 +137,10 @@ export interface FileRoutesByFullPath {
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
   '/new-drops': typeof NewDropsRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -136,7 +157,10 @@ export interface FileRoutesByTo {
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
   '/new-drops': typeof NewDropsRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/product/$id': typeof ProductIdRoute
   '/admin': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -155,7 +179,10 @@ export interface FileRoutesById {
   '/customize': typeof CustomizeRoute
   '/login': typeof LoginRoute
   '/new-drops': typeof NewDropsRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/product/$id': typeof ProductIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/product/$uid': typeof AdminProductUidRoute
@@ -175,7 +202,10 @@ export interface FileRouteTypes {
     | '/customize'
     | '/login'
     | '/new-drops'
+    | '/privacy'
+    | '/shipping-returns'
     | '/shop'
+    | '/terms'
     | '/product/$id'
     | '/admin/'
     | '/admin/product/$uid'
@@ -192,7 +222,10 @@ export interface FileRouteTypes {
     | '/customize'
     | '/login'
     | '/new-drops'
+    | '/privacy'
+    | '/shipping-returns'
     | '/shop'
+    | '/terms'
     | '/product/$id'
     | '/admin'
     | '/admin/product/$uid'
@@ -210,7 +243,10 @@ export interface FileRouteTypes {
     | '/customize'
     | '/login'
     | '/new-drops'
+    | '/privacy'
+    | '/shipping-returns'
     | '/shop'
+    | '/terms'
     | '/product/$id'
     | '/admin/'
     | '/admin/product/$uid'
@@ -229,7 +265,10 @@ export interface RootRouteChildren {
   CustomizeRoute: typeof CustomizeRoute
   LoginRoute: typeof LoginRoute
   NewDropsRoute: typeof NewDropsRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ShippingReturnsRoute: typeof ShippingReturnsRoute
   ShopRoute: typeof ShopRoute
+  TermsRoute: typeof TermsRoute
   ProductIdRoute: typeof ProductIdRoute
   ApiPublicMediaSplatRoute: typeof ApiPublicMediaSplatRoute
 }
@@ -313,11 +352,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewDropsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping-returns': {
+      id: '/shipping-returns'
+      path: '/shipping-returns'
+      fullPath: '/shipping-returns'
+      preLoaderRoute: typeof ShippingReturnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -375,7 +435,10 @@ const rootRouteChildren: RootRouteChildren = {
   CustomizeRoute: CustomizeRoute,
   LoginRoute: LoginRoute,
   NewDropsRoute: NewDropsRoute,
+  PrivacyRoute: PrivacyRoute,
+  ShippingReturnsRoute: ShippingReturnsRoute,
   ShopRoute: ShopRoute,
+  TermsRoute: TermsRoute,
   ProductIdRoute: ProductIdRoute,
   ApiPublicMediaSplatRoute: ApiPublicMediaSplatRoute,
 }
