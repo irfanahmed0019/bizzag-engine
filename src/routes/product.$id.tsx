@@ -83,10 +83,10 @@ const frameSizes = frameSizeOptions.map((s) => s.name);
 const frameLayouts = frameLayoutOptions.map((l) => l.name);
 
 const valueProps = [
-  { icon: Award, title: "Premium Quality", note: "Crafted with love" },
-  { icon: ShieldCheck, title: "Secure Packaging", note: "Safe & reliable delivery" },
+  { icon: Award, title: "7-day exchange", note: "Unused, with tags" },
+  { icon: ShieldCheck, title: "Confirm before you pay", note: "Everything checked on WhatsApp" },
   { icon: RotateCcw, title: "Fast Response", note: "We reply on WhatsApp quickly" },
-  { icon: HandHeart, title: "Made in India", note: "Proudly handcrafted" },
+  { icon: HandHeart, title: "Delivery across India", note: "Charges confirmed on WhatsApp" },
 ];
 
 async function fileToBase64(file: File) {
