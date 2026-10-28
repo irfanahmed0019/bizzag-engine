@@ -11,9 +11,9 @@ export const Route = createFileRoute("/shop")({
     typeof search["category"] === "string" ? { category: search["category"] } : {},
   loader:({context})=>Promise.all([context.queryClient.ensureQueryData(productsQuery), context.queryClient.ensureQueryData(categoriesQuery)]),
   head:()=>({meta:[
-    {title:"Shop — BIZZAG"},
+    {title:"Shop - BIZZAG"},
     {name:"description",content:"Shop trend-led BIZZAG fashion, footwear, watches and accessories."},
-    {property:"og:title",content:"Shop — BIZZAG"},
+    {property:"og:title",content:"Shop - BIZZAG"},
     {property:"og:description",content:"Shop trend-led BIZZAG fashion, footwear, watches and accessories."},
     {property:"og:type",content:"website"},
     {name:"twitter:card",content:"summary_large_image"},

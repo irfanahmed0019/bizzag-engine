@@ -9,7 +9,7 @@ export function useSettings() {
   return data ?? defaultSettings;
 }
 
-/** Generic "chat with us" link — used in header, footer and hero. */
+/** Generic "chat with us" link - used in header, footer and hero. */
 export function WhatsAppLink({
   className,
   children,

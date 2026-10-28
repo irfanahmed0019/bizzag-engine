@@ -70,7 +70,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
-      /* storage full or blocked — cart just won't persist */
+      /* storage full or blocked - cart just won't persist */
     }
   }, [items, storageLoaded]);
 

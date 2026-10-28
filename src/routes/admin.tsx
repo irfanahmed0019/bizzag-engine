@@ -14,9 +14,9 @@ export const Route = createFileRoute("/admin")({
   },
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — BIZZAG" },
+      { title: "Admin Dashboard - BIZZAG" },
       { name: "description", content: "Private admin dashboard for managing the BIZZAG catalogue." },
-      { property: "og:title", content: "Admin Dashboard — BIZZAG" },
+      { property: "og:title", content: "Admin Dashboard - BIZZAG" },
       { property: "og:description", content: "Private admin dashboard for the BIZZAG store." },
       { name: "robots", content: "noindex" },
     ],

@@ -237,7 +237,7 @@ function ProductsPanel() {
             {!isLoading && products.length === 0 && (
               <tr>
                 <td colSpan={6} className="px-4 py-10 text-center text-muted-foreground">
-                  No products yet — add your first one.
+                  No products yet - add your first one.
                 </td>
               </tr>
             )}
@@ -506,7 +506,7 @@ function HomeEditor({ initial }: { initial: HomeContent | undefined }) {
           })}
           {chosen.length === 0 && (
             <li className="px-3 py-6 text-center text-sm text-muted-foreground">
-              Nothing picked yet — products marked “Bestseller” are shown automatically.
+              Nothing picked yet - products marked “Bestseller” are shown automatically.
             </li>
           )}
         </ul>

@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/account")({
   head: () => ({ meta: [
-    { title: "My Profile — BIZZAG" },
+    { title: "My Profile - BIZZAG" },
     { name: "description", content: "Save your BIZZAG delivery details for quicker WhatsApp orders." },
-    { property: "og:title", content: "My Profile — BIZZAG" },
+    { property: "og:title", content: "My Profile - BIZZAG" },
     { property: "og:description", content: "Save delivery details for quicker BIZZAG orders." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },

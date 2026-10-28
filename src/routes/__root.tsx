@@ -90,13 +90,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BIZZAG — BE YOUR STYLE." },
+      { title: "BIZZAG - BE YOUR STYLE." },
       {
         name: "description",
         content:
           "Trend-led fashion, everyday fits and new drops from BIZZAG.",
       },
-      { property: "og:title", content: "BIZZAG — BE YOUR STYLE." },
+      { property: "og:title", content: "BIZZAG - BE YOUR STYLE." },
       {
         property: "og:description",
         content: "Trend-led fashion and everyday pieces. Don’t follow the style. Make yours.",

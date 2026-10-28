@@ -9,13 +9,13 @@ import { buildCartMessage, whatsappHref } from "@/lib/whatsapp";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart — BIZZAG" },
+      { title: "Your Cart - BIZZAG" },
       {
         name: "description",
         content:
           "Review your selected fits and send your order to BIZZAG on WhatsApp.",
       },
-      { property: "og:title", content: "Your Cart — BIZZAG" },
+      { property: "og:title", content: "Your Cart - BIZZAG" },
       {
         property: "og:description",
         content: "Review your selected fits and order them on WhatsApp.",
@@ -51,7 +51,7 @@ function CartPage() {
     <div className="mx-auto max-w-5xl px-5 py-12">
       <h1 className="font-display text-3xl font-semibold">Your cart</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        No online payment — send your list on WhatsApp and we'll confirm everything with you.
+        No online payment - send your list on WhatsApp and we'll confirm everything with you.
       </p>
 
       {items.length === 0 ? (

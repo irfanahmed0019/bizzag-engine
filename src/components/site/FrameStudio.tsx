@@ -423,7 +423,7 @@ export function FrameStudio({
                 value={text}
                 maxLength={80}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="e.g. To Irfan & Aisha — Together Forever, 2026"
+                placeholder="e.g. To Irfan & Aisha - Together Forever, 2026"
                 className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary"
               />
               <p className="mt-2 text-[0.7rem] text-muted-foreground">
@@ -482,7 +482,7 @@ export function FrameStudio({
               className="flex flex-1 items-center justify-center gap-2 rounded-md bg-[#25D366] py-3.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
             >
               {sending ? <Loader2 className="size-4 animate-spin" /> : <MessageCircle className="size-4" />}
-              Order via WhatsApp — {formatINR(total)}
+              Order via WhatsApp - {formatINR(total)}
             </button>
           </div>
         </div>

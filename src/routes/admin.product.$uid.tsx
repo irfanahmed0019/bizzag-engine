@@ -596,7 +596,7 @@ function ProductEditor() {
         <section className="rounded-lg border border-border p-6">
           <h3 className="text-sm font-semibold">8. Customisation fields</h3>
           <p className="mt-1 text-xs text-muted-foreground">
-            Extra inputs customers fill in — engraving text, a message, or photo uploads.
+            Extra inputs customers fill in - engraving text, a message, or photo uploads.
           </p>
           <div className="mt-4 space-y-3">
             {form.customFields.map((field, i) => (

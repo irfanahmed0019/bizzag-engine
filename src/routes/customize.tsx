@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
 export const Route = createFileRoute("/customize")({
-  head: () => ({ meta: [{ title: "Find Your Style — BIZZAG" }, { name: "description", content: "A quick BIZZAG style discovery experience." }] }),
+  head: () => ({ meta: [{ title: "Find Your Style - BIZZAG" }, { name: "description", content: "A quick BIZZAG style discovery experience." }] }),
   component: StyleDiscovery,
 });
 

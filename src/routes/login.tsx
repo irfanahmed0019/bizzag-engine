@@ -7,9 +7,9 @@ import { adminLogin } from "@/lib/admin.functions";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Admin Login — BIZZAG" },
+      { title: "Admin Login - BIZZAG" },
       { name: "description", content: "Private admin sign-in for the BIZZAG store team." },
-      { property: "og:title", content: "Admin Login — BIZZAG" },
+      { property: "og:title", content: "Admin Login - BIZZAG" },
       { property: "og:description", content: "Private admin sign-in for the BIZZAG store team." },
       { name: "robots", content: "noindex" },
     ],
